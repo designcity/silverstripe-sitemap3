@@ -1,0 +1,14 @@
+---
+Name: sitemap3
+---
+SiteMapPage:
+  hidefrommap:
+    ClassName:
+      - ErrorPage
+      - SiteMapPage
+  theme:
+    - default
+    #- slickMap
+SiteTree:
+  extensions:
+    - SiteMapSiteTreeExtension
