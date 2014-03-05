@@ -42,6 +42,6 @@ Be specific with what to hide; hiding a parent page will still cause it's childr
 The module provides a function that can be overriden on each Page type, canSiteMap($member).
 You can conceal Pages this way or add your own display functionality to the Page.
 
-Another method, if you wish for direct descendants to retain the default functionality of canSiteMap(), you can
+Another method, if you wish for direct descendants to retain the default functionality of canSiteMap(), is that you can
 overwrite the result by extending the Page and implementing the updateCanSiteMap($member) function. This takes precedence over
 canSiteMap() and can allow for specific functionality on select pages.
