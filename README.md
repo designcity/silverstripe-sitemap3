@@ -8,13 +8,14 @@ Dynamically generates a SiteMap tree for a silverstripe website. Offers alternat
 
 ##Themes
 The sitemap has multiple themes. The default theme focuses on generating an accessible, simple sitemap. The other included theme, Slickmap, is based on Astuteo's Slickmap css, (https://www.astuteo.com/slickmap/) and provides a more visual representation of the site layout.
-Respectively, you can use each theme by changing the _config/config.yml:
+Respectively, you can use each theme by changing the config.yml:
 ```yaml
 SiteMapPage:
 	#Default theme
 	theme: default
 	#Slickmap-based theme
 	theme: slickmap
+```
 
 ##Example Usage
 
