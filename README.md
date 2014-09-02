@@ -3,6 +3,9 @@
 ##Description
 Dynamically generates a SiteMap tree for a silverstripe website. Offers alternate display themes, page filtering options and accessibility markup.
 
+##Requirements
+* Silverstripe ~3.1
+
 ##Example Usage
 
 Example config.yml file in your project root 
@@ -45,6 +48,10 @@ You can conceal Pages this way or add your own display functionality to the Page
 Another method, if you wish for direct descendants to retain the default functionality of canSiteMap(), is that you can
 overwrite the result by extending the Page and implementing the updateCanSiteMap($member) function. This takes precedence over
 canSiteMap() and can allow for specific functionality on select pages.
+
+##Installing with Composer
+Simply call 
+	composer require designcity/silverstripe-sitemap3 dev-master
 
 ##Adding themes
 If you think you have a pretty tip-top theme, submit a pull request and we'll look at integrating it into the project.
