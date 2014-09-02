@@ -1,5 +1,5 @@
 {
-	"name": "designcity/sitemap3",
+	"name": "designcity/silverstripe-sitemap3",
 	"description": "A class that automatically builds sitemap for your project",
 	"type": "silverstripe-module",
 	"homepage": "https://github.com/designcity/sitemap3",
