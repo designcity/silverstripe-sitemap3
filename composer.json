@@ -2,7 +2,7 @@
 	"name": "designcity/silverstripe-sitemap3",
 	"description": "A class that automatically builds sitemap for your project",
 	"type": "silverstripe-module",
-	"homepage": "https://github.com/designcity/sitemap3",
+	"homepage": "https://github.com/designcity/silverstripe-sitemap3",
 	"keywords": ["silverstripe", "sitemap"],
 	"license": "BSD-3-Clause",
 	"authors": [
@@ -10,7 +10,7 @@
 		{"name": "Ryan Cotter", "email": "ryan@designcity.com.au"}
 	],
 	"support": {
-		"issues": "https://github.com/designcity/sitemap3/issues"
+		"issues": "https://github.com/designcity/silverstripe-sitemap3/issues"
 	},
 	"require": {
 		"silverstripe/cms": "~3.1",
