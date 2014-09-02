@@ -1,6 +1,6 @@
 {
 	"name": "designcity/silverstripe-sitemap3",
-	"description": "A class that automatically builds sitemap for your project",
+	"description": "A package that creates a sitemap based on your Silverstripe SiteTree. Includes optional themes, filtering options and accessibility markup.",
 	"type": "silverstripe-module",
 	"homepage": "https://github.com/designcity/silverstripe-sitemap3",
 	"keywords": ["silverstripe", "sitemap"],
