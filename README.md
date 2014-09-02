@@ -51,7 +51,9 @@ canSiteMap() and can allow for specific functionality on select pages.
 
 ##Installing with Composer
 Simply call 
-	composer require designcity/silverstripe-sitemap3 dev-master
+```
+composer require designcity/silverstripe-sitemap3 dev-master
+```
 
 ##Adding themes
 If you think you have a pretty tip-top theme, submit a pull request and we'll look at integrating it into the project.
