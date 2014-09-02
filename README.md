@@ -52,7 +52,7 @@ canSiteMap() and can allow for specific functionality on select pages.
 ##Installing with Composer
 Simply call 
 ```
-composer require designcity/silverstripe-sitemap3 dev-master
+composer require "designcity/silverstripe-sitemap3" "dev-master"
 ```
 
 ##Adding themes
