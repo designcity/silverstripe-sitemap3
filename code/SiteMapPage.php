@@ -13,10 +13,6 @@
  */
 class SiteMapPage extends Page {
 
-	private static $defaults = array(
-		'Content' => '<div>[SiteMap]</div>',
-	);
-
 	private static $icon = "sitemap3/images/treeicons/sitemap-file.png";
 
 	/**
@@ -60,7 +56,9 @@ class SiteMapPage extends Page {
 	 *
 	 *	Sitemap css and javascript can be selected using
 	 *	the SiteMapPage:Themes option in the config.yml.
-	 *	This will select the first theme in the list, if multiple are provided
+	 *
+	 *	Reads from {$themename}SiteMap.ss template, falling back to
+	 *	default SiteMap.ss
 	 *
 	 *	@param $arguments array Arguments to the shortcode
 	 *  @param $content string Content of the returned link (optional)
@@ -72,36 +70,64 @@ class SiteMapPage extends Page {
 		if(Controller::curr()->ClassName != "SiteMapPage") {return;}
 
 		$theme = Config::inst()->get('SiteMapPage','theme');
-		Requirements::css(SITEMAP3_DIR."/themes/".$theme[0]."/css/" . $theme[0] . ".css");
-		Requirements::javascript(SITEMAP3_DIR."/themes/".$theme[0]."/javascript/" . $theme[0] . ".js");
+		Requirements::css(SITEMAP3_DIR."/themes/".$theme."/css/" . $theme . ".css");
+		Requirements::javascript(SITEMAP3_DIR."/themes/".$theme."/javascript/" . $theme . ".js");
 		$data = self::getSiteMap(0);
 		//Slickmap column generation etc
-		$totalItems = count($data);
-		if (($totalItems - 1) < 11 ) { /* remove home page from count */
-			$slickmapWidth = "col".($totalItems - 1);
-		} else { $slickmapWidth = "col10"; }
-		$template = new SSViewer('SiteMap');
+		$TotalColumns = count($data) - 1;
+		//if (($TotalColumns - 1) < 11 ) { /* remove home page from count */
+		//	$TotalColumns = $totalItems - 1;
+		//} else { $slickmapWidth = "col10"; }
+		$template = new SSViewer(array($theme.'SiteMap','SiteMap'));
 		return $template->process(new ArrayData(array(
+			'CurrentPage' => Controller::curr(),
 			'SiteMapTree' => $data,
-			'SlickmapWidth' => $slickmapWidth,
+			'TotalColumns' => $TotalColumns,
 		)));
 	}
 
 	/**
-	 *	Ensures our sitemap is not rendered inside
-	 *	<p> tags, using <div> tags instead
+	 *  Creates a SiteMapPage at the top level when the database is built.
+	 *  Config MUST have 'autobuildpage' set to true, and site MUST NOT be in live mode.
 	 */
-	public function onBeforeWrite()
-	{
+	function requireDefaultRecords() {
+		parent::requireDefaultRecords();
+
+		$smp = DataObject::get_one('SiteMapPage');
+		$autobuild = Config::inst()->get('SiteMapPage','autobuildpage');
+		//TODO: This does not check for whether this SiteMapPage is an orphan or not
+		if(!$smp && !Director::isLive() && $autobuild === true) {
+			$smp = new SiteMapPage();
+			$smp->Title = _t('SiteMapPage.DEFAULTTITLE', 'Site Map');
+			$smp->Content = "<div>[SiteMap]</div><p>&nbsp;</p>";
+			$smp->URLSegment = singleton('SiteTree')->generateURLSegment(_t('SiteMapPage.DEFAULTTITLE', 'Site Map'));
+			$smp->Status = "Published";
+			$smp->write();
+			$smp->publish("Stage", "Live");
+
+			DB::alteration_message("Default site map page created ;)","created");
+		}
+	}
+
+	/**
+	 *  Adds default page title as set in Lang to the page when created using the CMS.
+	 *  Ensures our sitemap is not rendered inside <p> tags, using <div> tags instead
+	 */
+	public function onBeforeWrite() {
 		parent::onBeforeWrite();
-		$content = $this->Content;
+		if(!$this->ID) {
+			$this->Title = _t('SiteMapPage.DEFAULTTITLE', 'Site Map');
+			$this->MenuTitle = _t('SiteMapPage.DEFAULTTITLE', 'Site Map');
+			$this->Content = "<div>[SiteMap]</div><p>&nbsp;</p>";
+		} else {
+			$content = $this->Content;
+			if(preg_match('/(<p(.*)>\[SiteMap\])/', $content) !== false){
+				$pattern = '/<p(.*)>(\SiteMap(\]))<\/p>/';
+				$replacement = '<div>$2</div>';
 
-		if(preg_match('/(<p(.*)>\[SiteMap\])/', $content) !== false){
-			$pattern = '/<p(.*)>(\SiteMap(\]))<\/p>/';
-			$replacement = '<div>$2</div>';
-
-			$new = preg_replace($pattern, $replacement, $content);
-			$this->Content = $new;
+				$new = preg_replace($pattern, $replacement, $content);
+				$this->Content = $new;
+			}
 		}
 	}
 }

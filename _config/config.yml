@@ -1,14 +1,14 @@
 ---
 Name: sitemap3
+After: 'framework/*', 'cms/*'
 ---
 SiteMapPage:
   hidefrommap:
     ClassName:
       - ErrorPage
       - SiteMapPage
-  theme:
-    - default
-    #- slickMap
+  theme: default
+  autobuildpage: true
 SiteTree:
   extensions:
     - SiteMapSiteTreeExtension

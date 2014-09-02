@@ -3,3 +3,4 @@ en:
     PLURALNAME: "Site Map Pages"
     SINGULARNAME: "Site Map Page"
     DESCRIPTION: "A HTML site map based on your site structure"
+    DEFAULTTITLE: "Site Map"

@@ -25,8 +25,10 @@
 
 #sitemap li a{padding-left:28px;}
 #sitemap li span{float:left;position:absolute;top:5px;left:5px;width:13px;height:13px;cursor:auto;font-size:0;}
-#sitemap li span, #sitemap li span.collapsed{background:url(../images/collapsed.png) no-repeat 0 0; cursor:pointer;} 
-#sitemap li span.expanded{background:url(../images/expanded.png) no-repeat 0 0; cursor:pointer;}
+#sitemap li span, #sitemap li span.collapsed{background:url(../images/collapsed.png) no-repeat 0 0 !important; cursor:pointer;} 
+#sitemap li span.expanded{background:url(../images/expanded.png) no-repeat 0 0 !important; cursor:pointer;}
+#top #sitemap span:hover, #top #sitemap span:focus { color: white; background:url(../images/focused.png) no-repeat 0 0 !important; }
+
 
 /* sub levels */
 
