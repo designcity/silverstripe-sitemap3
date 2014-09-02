@@ -8,6 +8,7 @@ SiteMapPage:
       - ErrorPage
       - SiteMapPage
   theme: default
+  #theme: slickmap
   autobuildpage: true
 SiteTree:
   extensions:

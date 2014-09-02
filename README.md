@@ -6,6 +6,16 @@ Dynamically generates a SiteMap tree for a silverstripe website. Offers alternat
 ##Requirements
 * Silverstripe ~3.1
 
+##Themes
+The sitemap has multiple themes. The default theme focuses on generating an accessible, simple sitemap. The other included theme, Slickmap, is based on Astuteo's Slickmap css, (https://www.astuteo.com/slickmap/) and provides a more visual representation of the site layout.
+Respectively, you can use each theme by changing the _config/config.yml:
+```yaml
+SiteMapPage:
+	#Default theme
+	theme: default
+	#Slickmap-based theme
+	theme: slickmap
+
 ##Example Usage
 
 Example config.yml file in your project root 
@@ -50,7 +60,7 @@ overwrite the result by extending the Page and implementing the updateCanSiteMap
 canSiteMap() and can allow for specific functionality on select pages.
 
 ##Installing with Composer
-Simply call 
+Run from project root 
 ```
 composer require "designcity/silverstripe-sitemap3" "dev-master"
 ```
