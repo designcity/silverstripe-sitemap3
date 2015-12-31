@@ -25,33 +25,35 @@
  */
 class SiteMapSiteTreeExtension extends DataExtension
 {
-	/**
-	 *	Determines if a page should be displayed in the sitemap.
-	 *	Uses values set under 'hidefrommap' applied to the {@link SiteMapPage}
-	 *	class config.
-	 *
-	 *	@param Member $member
-	 *	returns boolean
-	 */
-	public function canSiteMap($member=null) {
-		$filter = Config::inst()->get('SiteMapPage', 'hidefrommap');
-		if(empty($filter)) return true; //If no settings have been set, no reason to not show the page
+    /**
+     *	Determines if a page should be displayed in the sitemap.
+     *	Uses values set under 'hidefrommap' applied to the {@link SiteMapPage}
+     *	class config.
+     *
+     *	@param Member $member
+     *	returns boolean
+     */
+    public function canSiteMap($member=null)
+    {
+        $filter = Config::inst()->get('SiteMapPage', 'hidefrommap');
+        if (empty($filter)) {
+            return true;
+        } //If no settings have been set, no reason to not show the page
 
-		$result = true;
-		foreach($filter as $k => $v)
-		{
-			$v = (is_array($v)) ? $v : array($v);
-			if(in_array($this->owner->$k, $v)){
-				$result = false;
-				break;
-			}
-		}
+        $result = true;
+        foreach ($filter as $k => $v) {
+            $v = (is_array($v)) ? $v : array($v);
+            if (in_array($this->owner->$k, $v)) {
+                $result = false;
+                break;
+            }
+        }
 
-		$extended = $this->owner->extend('updateCanSiteMap', $member);
-		if(!empty($extended)){
-			$result = $extended[0];
-		}
+        $extended = $this->owner->extend('updateCanSiteMap', $member);
+        if (!empty($extended)) {
+            $result = $extended[0];
+        }
 
-		return $result;
-	}
+        return $result;
+    }
 }
