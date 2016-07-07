@@ -35,6 +35,10 @@ class SiteMapSiteTreeExtension extends DataExtension
      */
     public function canSiteMap($member=null)
     {
+        if (!$this->owner->canView($member)) {
+            return false;
+        }
+
         $filter = Config::inst()->get('SiteMapPage', 'hidefrommap');
         if (empty($filter)) {
             return true;
