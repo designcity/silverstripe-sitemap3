@@ -69,7 +69,7 @@ class SiteMapPage extends Page
     public static function SiteMapShortCodeHandler($arguments, $caption=null, $parser=null)
     {
         // Are we on a SiteMap page? If not, return.
-        if (Controller::curr()->ClassName != "SiteMapPage") {
+        if (Director::is_cli() || Controller::curr()->ClassName != "SiteMapPage") {
             return;
         }
 
